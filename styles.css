@@ -1344,6 +1344,46 @@ section {
     transform: scale(1);
 }
 
+/* Indicatori pentru celelalte carduri clickabile */
+#apple-card,
+#meta-card,
+#tesla-card,
+#nvidia-card,
+#intel-card {
+    position: relative;
+}
+
+#apple-card::after,
+#meta-card::after,
+#tesla-card::after,
+#nvidia-card::after,
+#intel-card::after {
+    content: '→ Visit';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(255, 46, 151, 0.4);
+}
+
+#apple-card:hover::after,
+#meta-card:hover::after,
+#tesla-card:hover::after,
+#nvidia-card:hover::after,
+#intel-card:hover::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
 .conclusion {
     background: linear-gradient(135deg, var(--bg-darker) 0%, #1a0f2e 100%);
     padding: 6rem 0;

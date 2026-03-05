@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('%c🚀 Silicon Valley - Atestat Informatică', 'font-size: 20px; font-weight: bold; color: #00D9FF;');
     console.log('%cCreat de: Cristian Eduard-Mihai', 'font-size: 14px; color: #A0AEC0;');
     console.log('%cColegiul Național "Vladimir Streinu" Găești', 'font-size: 12px; color: #A0AEC0;');
-    console.log('%c\n🎨 Design inspirat de: Apple, Google, Tesla\n⚡ Tehnologii: HTML5, CSS3, Vanilla JavaScript\n💎 Features: Parallax, 3D transforms, Custom cursor, Smooth animations', 'font-size: 11px; color: #667eea;');
+    console.log('%c\nDesign inspirat de: Apple, Google, Tesla\n⚡ Tehnologii: HTML5, CSS3, Vanilla JavaScript', 'font-size: 11px; color: #667eea;');
     
     const logo = document.querySelector('.logo');
     let clickCount = 0;
@@ -421,12 +421,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.shiftKey && e.key === 'I') {
             console.clear();
-            console.log('%c👨‍💻 Developer Mode Activated', 'font-size: 18px; color: #43e97b;');
+            console.log('%cDeveloper Mode Activated', 'font-size: 18px; color: #43e97b;');
             console.log('%cBine ai venit în modul dezvoltator!', 'font-size: 14px; color: #00D9FF;');
         }
     });
 
-    // Google HQ Modal Popup - Am dat și pe acolo
+    // Google HQ Modal Popup 
     const googleCard = document.getElementById('google-card');
     const modal = document.getElementById('google-modal');
     const modalClose = document.querySelector('.modal-close');
@@ -441,8 +441,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Console Easter Egg
             setTimeout(() => {
                 console.log('%c🎉 SECRET UNLOCKED! 🎉', 'font-size: 20px; font-weight: bold; background: linear-gradient(135deg, #00D9FF, #7B2FFF, #FF2E97); padding: 10px 20px; border-radius: 8px; color: white;');
-                console.log('%c📸 Am dat și pe acolo... la Google HQ în Mountain View! 😎', 'font-size: 16px; color: #00D9FF; font-weight: bold;');
-                console.log('%c💡 Pro tip: Explorează și celelalte company cards!', 'font-size: 14px; color: #7B2FFF;');
+                console.log('%cAm dat și pe acolo... la Google HQ în Mountain View!', 'font-size: 16px; color: #00D9FF; font-weight: bold;');
+                console.log('%cPro tip: Explorează și celelalte company cards!', 'font-size: 14px; color: #7B2FFF;');
             }, 300);
         });
         
@@ -471,4 +471,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    const companyLinks = {
+        'apple-card': 'https://www.apple.com',
+        'meta-card': 'https://www.meta.com',
+        'tesla-card': 'https://www.tesla.com',
+        'nvidia-card': 'https://www.nvidia.com',
+        'intel-card': 'https://www.intel.com'
+    };
+
+    Object.keys(companyLinks).forEach(cardId => {
+        const card = document.getElementById(cardId);
+        if (card) {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', () => {
+                window.open(companyLinks[cardId], '_blank');
+            });
+        }
+    });
 });
