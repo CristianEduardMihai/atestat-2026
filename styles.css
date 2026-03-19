@@ -717,6 +717,7 @@ section {
     background: var(--bg-card);
     border-radius: 20px;
     overflow: hidden;
+    cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     opacity: 0;
@@ -1289,6 +1290,38 @@ section {
     margin: 0 auto;
 }
 
+.person-modal-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.person-modal-role {
+    color: var(--primary) !important;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.person-modal-extra {
+    color: var(--text-primary) !important;
+    white-space: pre-line;
+    line-height: 1.75;
+}
+
+#person-modal .person-modal-container {
+    max-width: 820px;
+}
+
+#person-modal .modal-image-wrapper {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+#person-modal .modal-image {
+    max-height: 300px;
+    object-fit: cover;
+}
+
 @media (max-width: 768px) {
     .modal-container {
         padding: 30px 20px;
@@ -1313,6 +1346,14 @@ section {
     
     .modal-text p {
         font-size: 1rem;
+    }
+
+    #person-modal .modal-image-wrapper {
+        max-width: 320px;
+    }
+
+    #person-modal .modal-image {
+        max-height: 220px;
     }
 }
 

@@ -210,6 +210,83 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const personModal = document.getElementById('person-modal');
+    const personModalClose = personModal ? personModal.querySelector('.person-modal-close') : null;
+    const personModalImage = document.getElementById('person-modal-image');
+    const personModalName = document.getElementById('person-modal-name');
+    const personModalRole = document.getElementById('person-modal-role');
+    const personModalDescription = document.getElementById('person-modal-description');
+    const personModalExtra = document.getElementById('person-modal-extra');
+
+    const personDetails = {
+        'steve-jobs': {
+            extra: 'Steve Jobs (1955-2011) a fost antreprenor american, co-fondator Apple Inc. și una dintre cele mai influente figuri din industria tehnologică.\nA revenit la Apple în 1997, a restructurat compania și a condus lansarea produselor Macintosh moderne, iPod, iPhone și iPad.\nA impus o filozofie bazată pe simplitate, integrare hardware-software și experiență premium pentru utilizator, transformând Apple într-un reper global al inovației.'
+        },
+        'bill-gates': {
+            extra: 'Bill Gates (n. 1955) este antreprenor, programator și filantrop american, co-fondator Microsoft alături de Paul Allen.\nSub conducerea sa, Microsoft a popularizat sistemul Windows și suita Office, contribuind decisiv la răspândirea calculatorului personal în mediul educațional și de business.\nDupă retragerea din managementul zilnic, s-a concentrat pe proiecte filantropice prin Bill & Melinda Gates Foundation, cu impact major în sănătate publică și educație.'
+        },
+        'elon-musk': {
+            extra: 'Elon Musk (n. 1971) este antreprenor tehnologic cunoscut pentru rolurile de leadership în Tesla, SpaceX, Neuralink și alte companii de frontieră.\nLa Tesla, a accelerat adoptarea vehiculelor electrice la scară globală, iar prin SpaceX a redus costurile lansărilor spațiale folosind rachete reutilizabile.\nViziunea sa se concentrează pe tranziția energetică, explorarea spațiului și dezvoltarea tehnologiilor avansate cu impact pe termen lung.'
+        },
+        'mark-zuckerberg': {
+            extra: 'Mark Zuckerberg (n. 1984) este programator și antreprenor american, fondator al Facebook (astăzi Meta Platforms).\nA construit una dintre cele mai mari platforme sociale din lume, cu miliarde de utilizatori și o influență majoră asupra comunicării digitale.\nÎn ultimii ani, a orientat strategia Meta către realitate virtuală și augmentată, promovând conceptul de metavers ca etapă următoare a internetului.'
+        },
+        'larry-page': {
+            extra: 'Larry Page (n. 1973) este informatician american și co-fondator Google, alături de Sergey Brin, pornind de la proiectul universitar PageRank.\nA fost esențial în transformarea Google din motor de căutare într-un ecosistem complet de produse: Android, Chrome, YouTube, cloud și servicii AI.\nCa lider al Google și ulterior Alphabet, a susținut proiecte de cercetare ambițioase, cu accent pe automatizare și inovație la scară largă.'
+        },
+        'sergey-brin': {
+            extra: 'Sergey Brin (n. 1973) este informatician și antreprenor american, co-fondator Google împreună cu Larry Page.\nA avut un rol central în dezvoltarea timpurie a motorului de căutare și în arhitectura tehnică ce a permis scalarea rapidă a serviciilor Google.\nEste cunoscut pentru interesul față de proiecte experimentale și cercetare avansată, contribuind la cultura de inovație continuă din cadrul companiei.'
+        }
+    };
+
+    function openPersonModal(card) {
+        if (!personModal || !card) return;
+
+        const personKey = card.dataset.person;
+        const img = card.querySelector('.person-image img');
+        const name = card.querySelector('.person-info h3');
+        const role = card.querySelector('.person-role');
+        const description = card.querySelector('.person-description');
+        const details = personDetails[personKey];
+
+        if (!img || !name || !role || !description || !details) return;
+
+        personModalImage.src = img.src;
+        personModalImage.alt = img.alt;
+        personModalName.textContent = name.textContent;
+        personModalRole.textContent = role.textContent;
+        personModalDescription.textContent = description.textContent;
+        personModalExtra.textContent = details.extra;
+
+        personModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePersonModal() {
+        if (!personModal) return;
+        personModal.classList.remove('active');
+        if (!document.getElementById('google-modal')?.classList.contains('active')) {
+            document.body.style.overflow = '';
+        }
+    }
+
+    personCards.forEach(card => {
+        card.addEventListener('click', () => openPersonModal(card));
+    });
+
+    if (personModal && personModalClose) {
+        personModalClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closePersonModal();
+        });
+
+        personModal.addEventListener('click', (e) => {
+            if (e.target === personModal) {
+                closePersonModal();
+            }
+        });
+    }
+
     const companyCards = document.querySelectorAll('.company-card');
     companyCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
@@ -429,8 +506,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Google HQ Modal Popup 
     const googleCard = document.getElementById('google-card');
     const modal = document.getElementById('google-modal');
-    const modalClose = document.querySelector('.modal-close');
-    const modalOverlay = document.querySelector('.modal-overlay');
+    const modalClose = modal ? modal.querySelector('.modal-close') : null;
+    const modalOverlay = modal;
     
     if (googleCard && modal) {
         // Open modal on Google card click
@@ -456,21 +533,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Close modal on overlay click (but not on container click)
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                modal.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    modal.classList.remove('active');
+                    if (!personModal?.classList.contains('active')) {
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+        }
         
         // Close modal on ESC key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.classList.contains('active')) {
                 modal.classList.remove('active');
-                document.body.style.overflow = '';
+                if (!personModal?.classList.contains('active')) {
+                    document.body.style.overflow = '';
+                }
             }
         });
     }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && personModal?.classList.contains('active')) {
+            closePersonModal();
+        }
+    });
 
     const companyLinks = {
         'apple-card': 'https://www.apple.com',

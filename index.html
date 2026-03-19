@@ -151,7 +151,7 @@
                 Vizionarii Silicon Valley
             </h2>
             <div class="personalities-grid">
-                <div class="person-card">
+                <div class="person-card" data-person="steve-jobs">
                     <div class="person-image">
                         <img src="data/steve-jobs.png" alt="Steve Jobs">
                         <div class="person-overlay">
@@ -164,7 +164,7 @@
                         <p class="person-description">Vizionar care a transformat Apple în cea mai valoroasă companie din lume, revolutionând industria computerelor personale, telefoanelor mobile și tabletelor.</p>
                     </div>
                 </div>
-                <div class="person-card">
+                <div class="person-card" data-person="bill-gates">
                     <div class="person-image">
                         <img src="data/bill-gates.png" alt="Bill Gates">
                         <div class="person-overlay">
@@ -177,7 +177,7 @@
                         <p class="person-description">Pionier al software-ului care a democratizat calculatoarele personale prin Windows, transformând Microsoft în gigant tehnologic global.</p>
                     </div>
                 </div>
-                <div class="person-card">
+                <div class="person-card" data-person="elon-musk">
                     <div class="person-image">
                         <img src="data/elon-musk.png" alt="Elon Musk">
                         <div class="person-overlay">
@@ -190,7 +190,7 @@
                         <p class="person-description">Antreprenor vizionar care revoluționează industria auto cu vehicule electrice și spațială prin rachete reutilizabile, redefinind viitorul transportului.</p>
                     </div>
                 </div>
-                <div class="person-card">
+                <div class="person-card" data-person="mark-zuckerberg">
                     <div class="person-image">
                         <img src="data/mark-zuckerberg.png" alt="Mark Zuckerberg">
                         <div class="person-overlay">
@@ -203,7 +203,7 @@
                         <p class="person-description">Creator al celei mai mari platforme sociale din lume, conectând miliarde de oameni și redefinind comunicarea și interacțiunea umană.</p>
                     </div>
                 </div>
-                <div class="person-card">
+                <div class="person-card" data-person="larry-page">
                     <div class="person-image">
                         <img src="data/larry-page.png" alt="Larry Page">
                         <div class="person-overlay">
@@ -216,7 +216,7 @@
                         <p class="person-description">Co-creator al celui mai folosit motor de căutare din lume, transformândGoogle în ecosistem tehnologic complet cu Android, Chrome și AI.</p>
                     </div>
                 </div>
-                <div class="person-card">
+                <div class="person-card" data-person="sergey-brin">
                     <div class="person-image">
                         <img src="data/sergey-brin.png" alt="Sergey Brin">
                         <div class="person-overlay">
@@ -552,6 +552,29 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal Popup: Personalități -->
+    <div id="person-modal" class="modal-overlay">
+        <div class="modal-container person-modal-container">
+            <button class="modal-close person-modal-close" aria-label="Închide modalul personalității">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <line x1="8" y1="8" x2="24" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="24" y1="8" x2="8" y2="24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <div class="modal-content">
+                <div class="modal-image-wrapper">
+                    <img id="person-modal-image" src="" alt="" class="modal-image">
+                </div>
+                <div class="modal-text person-modal-text">
+                    <h3 id="person-modal-name"></h3>
+                    <p id="person-modal-role" class="person-modal-role"></p>
+                    <p id="person-modal-description"></p>
+                    <p id="person-modal-extra" class="person-modal-extra"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal Popup: Google HQ Visit -->
     <div id="google-modal" class="modal-overlay">
